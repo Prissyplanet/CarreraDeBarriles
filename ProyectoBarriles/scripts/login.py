@@ -16,7 +16,7 @@ class LoginWindow(QWidget):
 
         
         self.logo = QLabel(self)
-        logo_path = os.path.join(os.path.dirname(__file__),'..','img', 'logo.png')  
+        logo_path = os.path.join(os.path.dirname(__file__),'..','img', 'logo.svg')  
         pixmap = QPixmap(logo_path)
 
         if pixmap.isNull():

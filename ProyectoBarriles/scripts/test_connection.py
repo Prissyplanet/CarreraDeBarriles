@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMessageBox
 from login import LoginWindow
-from db_connection import create_connection  # Asegúrate de que esté en la misma carpeta
+from db_connection import create_connection  
 
 class App:
     def __init__(self):
@@ -9,15 +9,14 @@ class App:
         self.window.login_button.clicked.connect(self.registrar_usuario)
 
     def registrar_usuario(self):
-        # Obtener los datos ingresados
         username = self.window.username.text()
         password = self.window.password.text()
 
-        print("Datos recibidos para registro:", username, password)  # Mensaje de depuración
+        print("Datos recibidos para registro:", username, password)
 
-        # Validar si los campos no están vacíos
+        
         if not username or not password:
-            print("Advertencia: campos vacíos")  # Mensaje de depuración
+            print("Advertencia: campos vacíos") 
             QMessageBox.warning(self.window, 'Error', 'Por favor, llena ambos campos.')
             return
 

@@ -14,31 +14,30 @@ class RegistroTiempos(QWidget):
         cargar_competidores(self.competidor)
 
     def initUI(self):
-        # Configuración de la ventana principal
         self.setGeometry(100, 100, 1920, 1080)
         self.setWindowTitle("Registro de Tiempos")
-        self.setStyleSheet("background-color: #FEC200;")  # Fondo amarillo
+        self.setStyleSheet("background-color: #FEC200;")  
 
-        # Ruta para la imagen del botón "Back"
+        
         base_path = os.path.dirname(os.path.abspath(__file__))
         back_path = os.path.join(base_path, '..', 'img', 'back.png')
 
-        # Cargar la imagen con QPixmap
+      
         self.back_image = QLabel(self)
         pixmap = QPixmap(back_path)
         self.back_image.setPixmap(pixmap)
-        self.back_image.setGeometry(30, 30, 60, 60)  # Tamaño y posición de la imagen
-        self.back_image.setCursor(Qt.PointingHandCursor)  # Cambia el cursor cuando pasa sobre la imagen
+        self.back_image.setGeometry(30, 30, 60, 60)  
+        self.back_image.setCursor(Qt.PointingHandCursor)  
         self.back_image.mousePressEvent = self.on_back_click
 
-        # Logo en la parte superior derecha
-        logo_path = os.path.join(base_path, '..', 'img', 'logo.png')
+        
+        logo_path = os.path.join(base_path, '..', 'img', 'logo.svg')
         self.logo = QLabel(self)
         pixmap_logo = QPixmap(logo_path).scaled(200, 70, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.logo.setPixmap(pixmap_logo)
         self.logo.setGeometry(1700, 30, 200, 70)
 
-        # Contenedor blanco
+        
         container_width = 1800
         container_height = 800
         center_x = (1920 - container_width) // 2
@@ -50,29 +49,24 @@ class RegistroTiempos(QWidget):
             border-radius: 25px;
         """)
 
-        # Layout del contenedor
         layout = QVBoxLayout(self.container)
 
-        # Título
         self.title = QLabel("Registro de tiempos", self.container)
         self.title.setStyleSheet("font-family: Arial; font-size: 60px; font-weight: regular; color: black;")
         self.title.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.title)
 
-        # Nuevo combobox para seleccionar categoría
         self.categoria = QComboBox(self.container)
-        self.categoria.addItems(["Selecciona una categoría", "Infantil", "Juvenil", "Abierta"])  # Categorías disponibles
-        self.estilizar_combobox(self.categoria)
+        self.categoria.addItems(["Selecciona una categoría", "Infantil", "Juvenil", "Abierta"])  
       
         layout.addWidget(self.categoria, alignment=Qt.AlignRight)
 
-        # Inputs y selectbox de competidores
         self.competidor = QComboBox(self.container)
         self.estilizar_combobox(self.competidor)
         self.competidor.setEnabled(False)
         layout.addWidget(self.competidor)
 
-        self.categoria.currentTextChanged.connect(self.on_categoria_changed)  # Conectar al método de cambio
+        self.categoria.currentTextChanged.connect(self.on_categoria_changed)  
 
         self.competidor.currentTextChanged.connect(lambda: verificar_afiliacion(self.competidor.currentText(), self.puntos))
 
@@ -87,9 +81,8 @@ class RegistroTiempos(QWidget):
         self.estilizar_input(self.puntos)
         layout.addWidget(self.puntos)
 
-        # Tabla de registro
         self.table = QTableWidget(self.container)
-        self.table.setRowCount(10)  # Filas iniciales
+        self.table.setRowCount(10)  
         self.table.setColumnCount(8)  # Columnas
         self.table.setHorizontalHeaderLabels(["Nombre", "Caballo", "Lugar", "Tiempo", "Puesto", "Puntos", "Categoría", "División"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
